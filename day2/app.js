@@ -1,14 +1,20 @@
 import express from "express";
-import homeRouter from "./routes/home";
-import productRouter from "./routes/product";
+// import homeRouter from "./routes/home";
+import router from "./routes";
+import dotenv from "dotenv";
+
 const app = express();
 const port = 8000;
 
+dotenv.config();
+
+const { PORT } = process.env;
+
 app.use(express.json());
 
-app.use(productRouter);
-app.use(homeRouter);
+app.use("/api", router);
+// app.use(homeRouter);
 
-app.listen(8000, () => {
-  console.log(`Server is running on ${port} port`);
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT} port`);
 });
